@@ -53,8 +53,9 @@ import java.util.Random;
 
 //
 public class BruteForceCracker {
+
 static long code = (long)(new Random().nextDouble() * 1_000_000_000);
-	
+	static boolean done=false;
 	static long startTime;
 static long endTime;
 	static float elapsedTime;
@@ -62,29 +63,35 @@ static long endTime;
 	public static void main(String[] args) {
 		System.out.println("Starting Brute Force Checker");
 		startTime = System.currentTimeMillis();
-		new Thread(()->betweenHigh().start();
-		new Thread(()->betweenHigh().start();
+		new Thread(()->betweenHigh()).start();
+		new Thread(()->betweenLow()).start();
 		
 		
 	}
-	public void betweenHigh() {
+	public static void betweenHigh() {
 		int ctr = 500000000;
-		while(!checkCode(ctr++));
+		while(!checkCode(ctr++)) {}
 		
+		done();
 		}
-	public void betweenLow() {
+	public static void betweenLow() {
 		int ctr = 0;
-		while(!checkCode(ctr++));
+		while(!checkCode(ctr++)) {}
 		
+		done();
 		}
 	public static void done() {
+		if(done==false) {
 		endTime = System.currentTimeMillis();
 		elapsedTime = (float)(endTime - startTime);
 		elapsedTime /= 1000.f;
 		System.out.println("Total time taken: " + elapsedTime + " seconds");
+		done=true;
+	}
 	}
 	public static boolean checkCode(long p){
 		if(p == code){
+			System.out.println(p);
 			return true;
 }else{
 			return false;
